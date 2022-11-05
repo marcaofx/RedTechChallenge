@@ -7,10 +7,8 @@ namespace RedTechnologies.Repository.Repository
 {
     public interface IUserRepository
     {
-        Task<IEnumerable<User>> GetAllAsync();
         Task<User> GetUserAsync(User user);
         Task<bool> CreateAsync(User user);
-        Task<bool> DeleteAsync(Guid id);
 
     }
 }

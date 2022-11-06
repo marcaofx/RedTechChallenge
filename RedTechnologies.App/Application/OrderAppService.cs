@@ -32,6 +32,12 @@ namespace RedTechnologies.App.Application
             return _mapper.Map<List<OrderViewModel>>(orders);
         }
 
+        public async Task<OrderViewModel> GetOrderByIdAsync(Guid id)
+        {
+            var order = await _orderRepository.GetOrderByIdAsync(id);
+            return _mapper.Map<OrderViewModel>(order);
+        }
+
         public async Task<bool> CreateAsync(OrderCommand orderCommand)
         {
             var order = _mapper.Map<Order>(orderCommand);

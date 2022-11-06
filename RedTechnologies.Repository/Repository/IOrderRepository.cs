@@ -10,6 +10,7 @@ namespace RedTechnologies.Repository.Repository
     {
         Task<IEnumerable<Order>> GetAllAsync();
         Task<IEnumerable<Order>> GetByOrderTypeAsync(OrderType orderType);
+        Task<Order> GetOrderByIdAsync(Guid id);
         Task<bool> CreateAsync(Order order);
         Task<bool> UpdateAsync(Guid id, Order order);
         Task<bool> DeleteAsync(Guid id);

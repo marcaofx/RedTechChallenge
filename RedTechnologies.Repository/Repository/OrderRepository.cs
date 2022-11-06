@@ -22,6 +22,13 @@ namespace RedTechnologies.Repository.Repository
                 return await dbContext.Orders.Where(c => (int)c.Type == (int)orderType).ToListAsync();
 
         }
+
+        public async Task<Order> GetOrderByIdAsync(Guid id)
+        {
+            using (var dbContext = new dbContext())
+                return await dbContext.Orders.FirstOrDefaultAsync(c => c.Id == id);
+
+        }
         public async Task<bool> CreateAsync(Order order)
         {
             using (var dbContext = new dbContext())
@@ -62,5 +69,6 @@ namespace RedTechnologies.Repository.Repository
                 return await dbContext.SaveChangesAsync() > 0;
             }
         }
+
     }
 }

@@ -25,7 +25,7 @@ namespace RedTechnologies.API.Controllers
         {
             try
             {
-                return Ok(new ResultHttp { Code = 200, Msg = "success", Data = await _orderAppService.GetAllAsync()});
+                return Ok(new ResultHttp { Code = 200, Msg = "success", Data = await _orderAppService.GetAllAsync() });
             }
             catch (InvalidOperationException iex)
             {
@@ -43,7 +43,25 @@ namespace RedTechnologies.API.Controllers
         {
             try
             {
-                return Ok(new ResultHttp { Code = 200, Msg = "success", Data = await _orderAppService.GetByOrderTypeAsync(orderTypeCommand)});
+                return Ok(new ResultHttp { Code = 200, Msg = "success", Data = await _orderAppService.GetByOrderTypeAsync(orderTypeCommand) });
+            }
+            catch (InvalidOperationException iex)
+            {
+                return BadRequest(new ResultHttp { Code = 400, Msg = iex.Message, Data = "" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ResultHttp { Code = 500, Msg = ex.Message, Data = "" });
+            }
+
+        }
+
+        [HttpGet("id")]
+        public async Task<IActionResult> Get(Guid id)
+        {
+            try
+            {
+                return Ok(new ResultHttp { Code = 200, Msg = "success", Data = await _orderAppService.GetOrderByIdAsync(id) });
             }
             catch (InvalidOperationException iex)
             {
@@ -61,7 +79,7 @@ namespace RedTechnologies.API.Controllers
         {
             try
             {
-                return Ok(new ResultHttp { Code = 200, Msg = "success", Data = await _orderAppService.CreateAsync(orderCommand)});
+                return Ok(new ResultHttp { Code = 200, Msg = "success", Data = await _orderAppService.CreateAsync(orderCommand) });
             }
             catch (InvalidOperationException iex)
             {
@@ -74,12 +92,12 @@ namespace RedTechnologies.API.Controllers
 
         }
 
-        [HttpPut]
+        [HttpPut("id")]
         public async Task<IActionResult> UpdateOrder(Guid id, [FromBody] OrderCommand orderCommand)
         {
             try
             {
-                return Ok(new ResultHttp { Code = 200, Msg = "success", Data = await _orderAppService.UpdateAsync(id, orderCommand)});
+                return Ok(new ResultHttp { Code = 200, Msg = "success", Data = await _orderAppService.UpdateAsync(id, orderCommand) });
             }
             catch (InvalidOperationException iex)
             {
@@ -97,7 +115,7 @@ namespace RedTechnologies.API.Controllers
         {
             try
             {
-                return Ok(new ResultHttp { Code = 200, Msg = "success", Data = await _orderAppService.DeleteAsync(id)});
+                return Ok(new ResultHttp { Code = 200, Msg = "success", Data = await _orderAppService.DeleteAsync(id) });
             }
             catch (InvalidOperationException iex)
             {

@@ -87,16 +87,7 @@ namespace RedTechnologies.API
                });
 
             //Added Cors
-            services.AddCors(opt =>
-            {
-                opt.AddPolicy("CorsPolicy", policy =>
-                {
-                    policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
-
-                });
-
-            });
-
+            services.AddCors();
 
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -113,6 +104,9 @@ namespace RedTechnologies.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RedTechnologies.API v1"));
             }
 
+            //Added Cors
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000"));
+
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();
@@ -122,6 +116,8 @@ namespace RedTechnologies.API
             {
                 endpoints.MapControllers();
             });
+
+
         }
     }
 }

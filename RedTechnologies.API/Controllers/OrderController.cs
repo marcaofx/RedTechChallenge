@@ -56,8 +56,8 @@ namespace RedTechnologies.API.Controllers
 
         }
 
-        [HttpGet("id")]
-        public async Task<IActionResult> Get(Guid id)
+        [HttpGet("orderById")]
+        public async Task<IActionResult> GetOrderById(Guid id)
         {
             try
             {

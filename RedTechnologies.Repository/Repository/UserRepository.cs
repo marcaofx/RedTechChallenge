@@ -15,7 +15,7 @@ namespace RedTechnologies.Repository.Repository
                 var userObj = await dbContext.Users.Where(c => c.UserName == user.UserName && c.Password == user.Password).FirstOrDefaultAsync();
 
                 if (userObj == null)
-                    throw new InvalidOperationException("You don't have access!");
+                    throw new InvalidOperationException("Unauthorized access!");
 
                 return userObj;
 

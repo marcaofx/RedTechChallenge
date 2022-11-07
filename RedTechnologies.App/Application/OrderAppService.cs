@@ -26,6 +26,12 @@ namespace RedTechnologies.App.Application
             var orders= await _orderRepository.GetAllAsync();
             return _mapper.Map<List<OrderViewModel>>(orders);
         }
+
+        public async Task<List<OrderViewModel>> GetAllCustomerNameAsync(string customerName)
+        {
+            var orders = await _orderRepository.GetAllCustomerByNameAsync(customerName);
+            return _mapper.Map<List<OrderViewModel>>(orders);
+        }
         public async Task<List<OrderViewModel>> GetByOrderTypeAsync(OrderTypeCommand orderTypeCommand)
         {
             var orders = await _orderRepository.GetByOrderTypeAsync((OrderType)orderTypeCommand);

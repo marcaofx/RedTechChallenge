@@ -16,6 +16,15 @@ namespace RedTechnologies.Repository.Repository
                 return await dbContext.Orders.ToListAsync();
         }
 
+        public async Task<IEnumerable<Order>> GetAllCustomerByNameAsync(string customerName)
+        {
+            using (var dbContext = new dbContext())
+            {
+                var result = await dbContext.Orders.Where(c => EF.Functions.Like(c.CustomerName, $"%{customerName}%")).ToListAsync();
+                return result;
+            }
+        }
+
         public async Task<IEnumerable<Order>> GetByOrderTypeAsync(OrderType orderType)
         {
             using (var dbContext = new dbContext())

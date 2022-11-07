@@ -56,6 +56,24 @@ namespace RedTechnologies.API.Controllers
 
         }
 
+        [HttpGet("customer/{name}")]
+        public async Task<IActionResult> GetAllCustomerByName(string name)
+        {
+            try
+            {
+                return Ok(new ResultHttp { Code = 200, Msg = "success", Data = await _orderAppService.GetAllCustomerNameAsync(name) });
+            }
+            catch (InvalidOperationException iex)
+            {
+                return BadRequest(new ResultHttp { Code = 400, Msg = iex.Message, Data = "" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new ResultHttp { Code = 500, Msg = ex.Message, Data = "" });
+            }
+
+        }
+
         [HttpGet("orderById")]
         public async Task<IActionResult> GetOrderById(Guid id)
         {
@@ -92,7 +110,7 @@ namespace RedTechnologies.API.Controllers
 
         }
 
-        [HttpPut("id")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateOrder(Guid id, [FromBody] OrderCommand orderCommand)
         {
             try
